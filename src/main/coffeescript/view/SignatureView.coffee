@@ -12,6 +12,8 @@ class SignatureView extends Backbone.View
     $(@el).html(template(@model))
 
     @switchToSnippet()
+    $('.snippet-link', $(this.el)).removeClass('selected')
+    $(".snippet", $(this.el)).hide()
 
     @isParam = @model.isParam
 
@@ -30,7 +32,7 @@ class SignatureView extends Backbone.View
     $(".description", $(@el)).show()
     $('.description-link', $(@el)).addClass('selected')
     $('.snippet-link', $(@el)).removeClass('selected')
-    
+
   # handler for show sample
   switchToSnippet: (e) ->
     e?.preventDefault()
@@ -48,4 +50,4 @@ class SignatureView extends Backbone.View
         textArea.val(@model.sampleJSON)
 
 
-    
+
