@@ -6,6 +6,12 @@ class ResourceView extends Backbone.View
 
     methods = {}
 
+    if @model.basePaths && Object.keys(@model.basePaths).length > 0
+      $('div.resourceContent div.basePaths', $(@el)).css('display','block')
+
+    for env, basePath of @model.basePaths
+      @addBasePath(env, basePath)
+
     # Render each operation
     for operation in @model.operationsArray
       counter = 0
@@ -19,12 +25,13 @@ class ResourceView extends Backbone.View
 
       operation.nickname = id
       operation.parentId = @model.id
-      @addOperation operation 
+      @addOperation operation
 
+    $('.toggleContent', @el).click(this.callDocs.bind(this, 'toggleContentForResource'))
     $('.toggleEndpointList', @el).click(this.callDocs.bind(this, 'toggleEndpointListForResource'))
     $('.collapseResource', @el).click(this.callDocs.bind(this, 'collapseOperationsForResource'))
     $('.expandResource', @el).click(this.callDocs.bind(this, 'expandOperationsForResoruce'))
-    
+
     return @
 
   addOperation: (operation) ->
@@ -36,6 +43,11 @@ class ResourceView extends Backbone.View
     $('.endpoints', $(@el)).append operationView.render().el
 
     @number++
+
+  addBasePath: (env, basePath) ->
+    # Render a basePath and add it to basePath li
+    basePathView = new BasePathView({model: {env: env, basePath: basePath}, tagName: 'tr', className: 'basePath'})
+    $('.basePath-Values', $(@el)).append basePathView.render().el
 
   #
   # Generic Event handler (`Docs` is global)
