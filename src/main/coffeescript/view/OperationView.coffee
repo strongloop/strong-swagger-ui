@@ -79,7 +79,7 @@ class OperationView extends Backbone.View
 
     for param in @model.parameters
       type = param.type || param.dataType
-      if type.toLowerCase() == 'file'
+      if (type || '').toLowerCase() == 'file'
         if !contentTypeModel.consumes
           log "set content type "
           contentTypeModel.consumes = 'multipart/form-data'
@@ -165,7 +165,7 @@ class OperationView extends Backbone.View
     # add params
     for param in @model.parameters
       if param.paramType is 'form'
-        if param.type.toLowerCase() isnt 'file' and map[param.name] != undefined
+        if (param.type || '').toLowerCase() isnt 'file' and map[param.name] != undefined
             bodyParam.append(param.name, map[param.name])
 
     # headers in operation
