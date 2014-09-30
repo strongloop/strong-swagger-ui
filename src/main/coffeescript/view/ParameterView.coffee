@@ -19,7 +19,7 @@ class ParameterView extends Backbone.View
     modelLabel = @model.param.type || @model.param.dataType
     if modelAnchor.indexOf('[') >= 0
       modelAnchor = modelAnchor.replace(/\[/, 'ArrayOf').replace(/\]/, '')
-      modelLabel = modelLabel.replace(/\[/, 'Array of ').replace(/\]/, '')
+      modelLabel = modelLabel.replace(/(array)?\[/, 'Array of ').replace(/\]/, '')
     signatureModel =
       parentId: @model.container.resourceName,
       nickname: @model.container.nickname,
