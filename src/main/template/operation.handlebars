@@ -56,6 +56,49 @@
           </table>
           {{/if}}
         </form>
+        <div class="response-content-type" />
+        {{#if isReadOnly}}
+        {{else}}
+          <div class='sandbox_header'>
+            <input class='submit' name='commit' type='button' value='Try it out!' />
+            <a href='#' class='response_hider' style='display:none'>Hide Response</a>
+            <span class='response_throbber' style='display:none'></span>
+          </div>
+        {{/if}}
+        <div class='response' style='display:none'>
+          <table class='fullwidth'>
+            <tr>
+              <td class='response-header' colspan='2'><h4>Response</h4></td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td><div class='block response_code'></div></td>
+            </tr>
+            <tr>
+              <td>Body</td>
+              <td><div class='block response_body'></div></td>
+            </tr>
+            <tr>
+              <td>Headers</td>
+              <td><div class='block response_headers'></div></td>
+            </tr>
+            <tr>
+              <td class='response-header' colspan='2'><h4>Request</h4></td>
+            </tr>
+            <tr>
+              <td>URL</td>
+              <td><div class='block request_url'></div></td>
+            </tr>
+            <tr>
+              <td>Headers</td>
+              <td><div class='block request_headers'></div></td>
+            </tr>
+            <tr>
+              <td>Body</td>
+              <td><div class='block request_body'></div></td>
+            </tr>
+          </table>
+        </div>
         {{#if type}}
           <h4>Response Class</h4>
           <p><span class="model-signature" /></p>
@@ -77,53 +120,6 @@
           </tbody>
         </table>
         {{/if}}
-        <div class="response-content-type" />
-        {{#if isReadOnly}}
-        {{else}}
-          <div class='sandbox_header'>
-            <input class='submit' name='commit' type='button' value='Try it out!' />
-            <a href='#' class='response_hider' style='display:none'>Hide Response</a>
-            <span class='response_throbber' style='display:none'></span>
-          </div>
-        {{/if}}
-        <div class='response' style='display:none'>
-          <h4>Request</h4>
-          <table>
-            <tr>
-              <td width="10" />
-              <td><br/>url</td>
-              <td><div class='block request_url'></div></td>
-            </tr>
-            <tr>
-              <td width="10" />
-              <td><br/>headers</td>
-              <td><div class='block request_headers'></div></td>
-            </tr>
-            <tr>
-              <td width="10" />
-              <td><br/>body</td>
-              <td><div class='block request_body'></div></td>
-            </tr>
-          </table>
-          <h4>Response</h4>
-          <table>
-            <tr>
-              <td width="10" />
-              <td><br/>code</td>
-              <td><div class='block response_code'></div></td>
-            </tr>
-            <tr>
-              <td width="10" />
-              <td><br/>headers</td>
-              <td><div class='block response_headers'></div></td>
-            </tr>
-            <tr>
-              <td width="10" />
-              <td><br/>body</td>
-              <td><div class='block response_body'></div></td>
-            </tr>
-          </table>
-        </div>
       </div>
     </li>
   </ul>

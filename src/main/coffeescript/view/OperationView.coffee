@@ -191,6 +191,8 @@ class OperationView extends Backbone.View
 
     $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(@invocationUrl);
+    @showContent('json', headerParams, ".request_headers", $(this.el))
+    $(".request_body", $(this.el)).html(bodyParam || 'No Content')
 
     obj =
       type: @model.method
@@ -201,10 +203,13 @@ class OperationView extends Backbone.View
       contentType: false
       processData: false
       error: (data, textStatus, error) =>
+        data.request = { headers: headerParams, body: bodyParam }
         @showErrorStatus(@wrap(data), @)
       success: (data) =>
+        data.request = { headers: headerParams, body: bodyParam }
         @showResponse(data, @)
       complete: (data) =>
+        data.request = { headers: headerParams, body: bodyParam }
         @showCompleteStatus(@wrap(data), @)
 
     # apply authorizations
@@ -327,6 +332,33 @@ class OperationView extends Backbone.View
     formatted
 
 
+  showContent: (contentType, content, query, parent) ->
+    targetElement = $(query, parent)
+    targetElement.removeClass('json')
+    targetElement.removeClass('xml')
+    if !content
+      pre = $('<pre />').text("No Content")
+    else if /json/.test(contentType)
+      try
+        json = if typeof content == 'string' then JSON.parse(content) else content
+        pre = $('<pre class="json" />').text(JSON.stringify(json, null, "  "))
+      catch
+        pre = $('<pre class="json" />').append(content)
+      targetElement.addClass('json')
+    else if /xml/.test(contentType)
+      pre = $('<pre class="xml" />').text(@formatXml(content))
+      targetElement.addClass('xml')
+    else if /html/.test(contentType)
+      pre = $('<pre class="xml" />').html(content)
+      targetElement.addClass('xml')
+    else if /image/.test(contentType)
+      pre = $('<img>').attr('src',url)
+    else
+      # don't know what to render!
+      pre = $('<pre class="json" />').text(content)
+      targetElement.addClass('json')
+    targetElement.html(pre)
+
   # puts the response data in UI
   showStatus: (response) ->
     if response.content is undefined
@@ -338,50 +370,30 @@ class OperationView extends Backbone.View
     headers = response.headers
 
     # if server is nice, and sends content-type back, we can use it
-    contentType = if headers && headers["Content-Type"] then headers["Content-Type"].split(";")[0].trim() else null
+    contentType = if headers && headers["Content-Type"] then headers["Content-Type"] else null
+    requestContentType = 'json'
+    if response.request && response.request.headers
+      requestContentType = response.request.headers['Content-Type'] || 'json'
 
-    if !content
-      code = $('<code />').text("no content")
-      pre = $('<pre class="json" />').append(code)
-    else if contentType is "application/json" || /\+json$/.test(contentType)
-      code = $('<code />').text(JSON.stringify(JSON.parse(content), null, "  "))
-      pre = $('<pre class="json" />').append(code)
-    else if contentType is "application/xml" || /\+xml$/.test(contentType)
-      code = $('<code />').text(@formatXml(content))
-      pre = $('<pre class="xml" />').append(code)
-    else if contentType is "text/html"
-      code = $('<code />').html(content)
-      pre = $('<pre class="xml" />').append(code)
-    else if /^image\//.test(contentType)
-      pre = $('<img>').attr('src',url)
-    else
-      # don't know what to render!
-      code = $('<code />').text(content)
-      pre = $('<pre class="json" />').append(code)
-
-    if !obj.data
-      reqcode = $('<code />').text("no content")
-      reqpre = $('<pre class="json" />').append(reqcode)
-    else
-      reqcode = $('<code />').text(obj.data)
-      reqpre = $('<pre class="json" />').append(reqcode)
-
-
-    response_body = pre
-    req_body = reqpre
     $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(url);
-    $(".request_body", $(@el)).html req_body
-    $(".request_headers", $(@el)).html "<pre>" + _.escape(JSON.stringify(obj.headers, null, "  ")).replace(/\n/g, "<br>") + "</pre>"
+    @showContent(requestContentType, response.request && response.request.body, ".request_body", $(@el))
+    @showContent('json', response.request && response.request.headers, ".request_headers", $(@el))
     $(".response_code", $(@el)).html "<pre>" + response.status + "</pre>"
-    $(".response_body", $(@el)).html response_body
-    $(".response_headers", $(@el)).html "<pre>" + _.escape(JSON.stringify(response.headers, null, "  ")).replace(/\n/g, "<br>") + "</pre>"
+    @showContent(contentType, content, ".response_body", $(@el))
+    @showContent('json', response.headers, ".response_headers", $(@el))
     $(".response", $(@el)).slideDown()
     $(".response_hider", $(@el)).show()
     $(".response_throbber", $(@el)).hide()
+    request_headers_el = $('.request_headers', $(@el))[0]
+    request_body_el = $('.request_body', $(@el))[0]
+    response_headers = $('.response_headers', $(@el))[0]
     response_body_el = $('.response_body', $(@el))[0]
     # only highlight the response if response is less than threshold, default state is highlight response
     opts = @options.swaggerOptions
+    hljs.highlightBlock(request_headers_el)
+    hljs.highlightBlock(request_body_el)
+    hljs.highlightBlock(response_headers)
     if opts.highlightSizeThreshold && response.data.length > opts.highlightSizeThreshold then response_body_el else hljs.highlightBlock(response_body_el)
 
   toggleOperationContent: ->
