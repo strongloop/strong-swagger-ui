@@ -153,6 +153,14 @@ class OperationView extends Backbone.View
   success: (response, parent) ->
     parent.showCompleteStatus response
 
+  hideHeaders: (headers) ->
+    headersToShow = {}
+    if headers
+      headersToHide = @options.swaggerOptions?.headersToHide || []
+      for headerKey, headerValue of headers
+        headersToShow[headerKey] = headerValue if headersToHide.indexOf(headerKey) == -1
+    headersToShow
+
   handleFileUpload: (map, form) ->
     for o in form.serializeArray()
       if(o.value? && jQuery.trim(o.value).length > 0)
@@ -191,7 +199,8 @@ class OperationView extends Backbone.View
 
     $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(@invocationUrl);
-    @showContent('json', headerParams, ".request_headers", $(this.el))
+    safeHeaders = @hideHeaders(headerParams)
+    @showContent('json', safeHeaders, ".request_headers", $(this.el))
     $(".request_body", $(this.el)).html(bodyParam || 'No Content')
 
     obj =
@@ -203,13 +212,13 @@ class OperationView extends Backbone.View
       contentType: false
       processData: false
       error: (data, textStatus, error) =>
-        data.request = { headers: headerParams, body: bodyParam }
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showErrorStatus(@wrap(data), @)
       success: (data) =>
-        data.request = { headers: headerParams, body: bodyParam }
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showResponse(data, @)
       complete: (data) =>
-        data.request = { headers: headerParams, body: bodyParam }
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showCompleteStatus(@wrap(data), @)
 
     # apply authorizations
@@ -378,10 +387,10 @@ class OperationView extends Backbone.View
     $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(url);
     @showContent(requestContentType, response.request && response.request.body, ".request_body", $(@el))
-    @showContent('json', response.request && response.request.headers, ".request_headers", $(@el))
+    @showContent('json', response.request && @hideHeaders(response.request.headers), ".request_headers", $(@el))
     $(".response_code", $(@el)).html "<pre>" + response.status + "</pre>"
     @showContent(contentType, content, ".response_body", $(@el))
-    @showContent('json', response.headers, ".response_headers", $(@el))
+    @showContent('json', @hideHeaders(response.headers), ".response_headers", $(@el))
     $(".response", $(@el)).slideDown()
     $(".response_hider", $(@el)).show()
     $(".response_throbber", $(@el)).hide()
@@ -389,11 +398,11 @@ class OperationView extends Backbone.View
     request_body_el = $('.request_body', $(@el))[0]
     response_headers = $('.response_headers', $(@el))[0]
     response_body_el = $('.response_body', $(@el))[0]
-    # only highlight the response if response is less than threshold, default state is highlight response
-    opts = @options.swaggerOptions
     hljs.highlightBlock(request_headers_el)
     hljs.highlightBlock(request_body_el)
     hljs.highlightBlock(response_headers)
+    # only highlight the response if response is less than threshold, default state is highlight response
+    opts = @options.swaggerOptions
     if opts.highlightSizeThreshold && response.data.length > opts.highlightSizeThreshold then response_body_el else hljs.highlightBlock(response_body_el)
 
   toggleOperationContent: ->
