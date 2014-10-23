@@ -137,7 +137,9 @@ var Docs = {
         log("a_dom_id " + a_dom_id);
         log("a_content_dom_id " + a_content_dom_id);
 
-        Docs.expandModel($('#'+a_dom_id));
+        if ($('.signature-container .description', $('#'+a_dom_id).closest('div')).is(':hidden')) {
+          Docs.expandModel($('#' + a_dom_id));
+        }
         $('#'+a_dom_id).slideto({highlight: false});
         break;
 		}
