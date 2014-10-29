@@ -1,6 +1,14 @@
+{{#if required}}
+<td class='code required'>{{name}} *</td>
+{{else}}
 <td class='code'>{{name}}</td>
+{{/if}}
 <td>
+  {{#if required}}
+  <select {{#isArray this}} multiple='multiple'{{/isArray}} class='parameter required' name='{{name}}'>
+  {{else}}
   <select {{#isArray this}} multiple='multiple'{{/isArray}} class='parameter' name='{{name}}'>
+  {{/if}}
     {{#if required}}
     {{else}}
       {{#if defaultValue}}
@@ -20,6 +28,10 @@
     {{/each}}
   </select>
 </td>
+{{#if required}}
+<td><strong>{{{description}}}</strong></td>
+{{else}}
 <td>{{{description}}}</td>
+{{/if}}
 <td>{{{paramType}}}</td>
 <td><span class="model-signature"></span></td>

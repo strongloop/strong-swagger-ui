@@ -1,4 +1,4 @@
-<td class='code required'>{{name}}</td>
+<td class='code required'>{{name}} *</td>
 <td>
     {{#if isBody}}
         <textarea class='body-textarea'  readonly='readonly' placeholder='(required)' name='{{name}}'>{{defaultValue}}</textarea>
@@ -10,6 +10,6 @@
         {{/if}}
     {{/if}}
 </td>
-<td>{{{description}}}</td>
+<td><strong>{{{description}}}</strong></td>
 <td>{{{paramType}}}</td>
 <td><span class="model-signature"></span></td>
