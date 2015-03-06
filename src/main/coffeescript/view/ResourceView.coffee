@@ -24,7 +24,8 @@ class ResourceView extends Backbone.View
       methods[id] = operation
 
       operation.nickname = id
-      operation.parentId = @model.id
+      operation.parentId = @model.id.replace(/[\/.]/g, '_')
+
       @addOperation operation
 
     $('.toggleContent', @el).click(this.callDocs.bind(this, 'toggleContentForResource'))

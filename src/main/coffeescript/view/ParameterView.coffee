@@ -6,7 +6,7 @@ class ParameterView extends Backbone.View
           opts.fn(@)
         else
           opts.inverse(@)
-          
+
   render: ->
     type = @model.param.type || @model.param.dataType
     @model.param.isBody = true if @model.param.paramType == 'body'
@@ -21,7 +21,7 @@ class ParameterView extends Backbone.View
       modelAnchor = modelAnchor.replace(/\[/, 'ArrayOf').replace(/\]/, '')
       modelLabel = modelLabel.replace(/(array)?\[/, 'Array of ').replace(/\]/, '')
     signatureModel =
-      parentId: @model.container.resourceName,
+      parentId: @model.container.resourceName.replace(/[\/.]/g, '_'),
       nickname: @model.container.nickname,
       modelAnchor: modelAnchor,
       sampleJSON: if typeof @model.param.sampleJSON == 'function' then @model.param.sampleJSON(@model.param) else @model.param.sampleJSON

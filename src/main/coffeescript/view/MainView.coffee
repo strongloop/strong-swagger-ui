@@ -26,7 +26,7 @@ class MainView extends Backbone.View
       while typeof resources[id] isnt 'undefined'
         id = id + "_" + counter
         counter += 1
-      resource.id = id
+      resource.id = id.replace(/[\/.]/g, '_')
       resources[id] = resource
       @addResource resource
     @

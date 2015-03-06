@@ -59,7 +59,7 @@ class OperationView extends Backbone.View
 
     if @model.responseClassSignature and @model.responseClassSignature != 'string'
       signatureModel =
-        parentId: @model.resourceName,
+        parentId: @model.resourceName.replace(/[\/.]/g, '_'),
         nickname: @model.nickname,
         modelAnchor: @model.responseClassSignature,
         sampleJSON: @model.responseSampleJSON

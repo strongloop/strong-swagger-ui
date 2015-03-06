@@ -44,7 +44,7 @@ class StatusCodeView extends Backbone.View
     else
       modelLabel = mockSignature
     responseModel =
-      parentId: @model.container.resourceName,
+      parentId: @model.container.resourceName.replace(/[\/.]/g, '_'),
       nickname: @model.container.nickname,
       modelAnchor: modelAnchor
       modelLabel: modelLabel
