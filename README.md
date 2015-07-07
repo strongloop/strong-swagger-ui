@@ -1,5 +1,14 @@
 # Swagger UI
 
+This repository contains a friendly fork
+of [swagger-ui](https://github.com/swagger-api/swagger-ui) v2.0.x with
+additional enhancements. Our goal is to eventually contribute these
+improvements to the upstream repository.
+
+The client is compatible with Swagger Spec versions 1.1 and 1.2, the Swagger
+Spec version 2.0 is *not* supported by this module.
+
+# What's Swagger UI?
 
 Swagger UI is part of Swagger project.  The Swagger project allows you to produce, visualize and consume your OWN RESTful services.  No proxy or 3rd party services required.  Do it your own way.
 
@@ -11,7 +20,7 @@ generate beautiful documentation and sandbox from a Swagger-compliant API. Becau
 The goal of Swagger™ is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined via Swagger, a consumer can understand and interact with the remote service with a minimal amount of implementation logic. Similar to what interfaces have done for lower-level programming, Swager removes the guesswork in calling the service.
 
 
-Check out [Swagger-Spec](https://github.com/wordnik/swagger-spec) for additional information about the Swagger project, including additional libraries with support for other languages and more. 
+Check out [Swagger-Spec](https://github.com/wordnik/swagger-spec) for additional information about the Swagger project, including additional libraries with support for other languages and more.
 
 
 ## How to Use It
@@ -96,9 +105,9 @@ Note!  You can pass multiple header params on a single request, just use unique 
 
 ## How to Improve It
 
-Create your own fork of [wordnik/swagger-ui](https://github.com/wordnik/swagger-ui)
+Create your own fork of [strongloop/strong-swagger-ui](https://github.com/strongloop/strong-swagger-ui)
 
-To share your changes, [submit a pull request](https://github.com/wordnik/swagger-ui/pull/new/master).
+To share your changes, [submit a pull request](https://github.com/strongloop/strong-swagger-ui/pull/new/master).
 
 Since the javascript files are compiled from coffeescript, please submit changes in the *.coffee files!  We have to reject changes only in the .js files as they will be lost on each build of the ui.
 
