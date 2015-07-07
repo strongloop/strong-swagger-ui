@@ -22,6 +22,8 @@ sourceFiles  = [
 task 'clean', 'Removes distribution', ->
   console.log 'Clearing dist...'
   exec 'rm -rf dist'
+  console.log 'Clearing html/css...'
+  exec 'rm -rf src/main/html/css'
 
 task 'dist', 'Build a distribution', ->
   console.log "Build distribution in ./dist"
@@ -83,6 +85,8 @@ task 'dist', 'Build a distribution', ->
     # Someone who knows CoffeeScript should make this more Coffee-licious
     console.log '   : Compiling LESS...'
 
+    if !fs.existsSync 'src/main/html/css'
+      fs.mkdirSync 'src/main/html/css'
     less.render fs.readFileSync("src/main/less/screen.less", 'utf8'), (err, css) ->
       fs.writeFileSync("src/main/html/css/screen.css", css)
     less.render fs.readFileSync("src/main/less/reset.less", 'utf8'), (err, css) ->
