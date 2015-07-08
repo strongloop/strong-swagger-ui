@@ -31,7 +31,7 @@ class ResourceView extends Backbone.View
     $('.toggleContent', @el).click(this.callDocs.bind(this, 'toggleContentForResource'))
     $('.toggleEndpointList', @el).click(this.callDocs.bind(this, 'toggleEndpointListForResource'))
     $('.collapseResource', @el).click(this.callDocs.bind(this, 'collapseOperationsForResource'))
-    $('.expandResource', @el).click(this.callDocs.bind(this, 'expandOperationsForResoruce'))
+    $('.expandResource', @el).click(this.callDocs.bind(this, 'expandOperationsForResource'))
 
     return @
 
