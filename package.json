@@ -22,6 +22,6 @@
     "coffee-script": "~1.6.3",
     "handlebars": "~1.0.10",
     "less": "~1.4.2",
-    "swagger-client": "2.0.36"
+    "strong-swagger-client": "^20.0.0"
   }
 }

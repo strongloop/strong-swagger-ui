@@ -1,7 +1,7 @@
 class MainView extends Backbone.View
   sorters = {
-    'alpha'   : (a,b) -> return a.path.localeCompare(b.path),
-    'method'  : (a,b) -> return a.method.localeCompare(b.method),
+    'alpha'   : (a,b) -> return a.path.localeCompare(b.path)
+    'method'  : (a,b) -> return a.method.localeCompare(b.method)
   }
 
   initialize: (opts={}) ->
@@ -26,7 +26,7 @@ class MainView extends Backbone.View
       while typeof resources[id] isnt 'undefined'
         id = id + "_" + counter
         counter += 1
-      resource.id = id
+      resource.id = id.replace(/[\/.]/g, '_')
       resources[id] = resource
       @addResource resource
     @

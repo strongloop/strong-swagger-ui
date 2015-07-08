@@ -59,10 +59,13 @@ class OperationView extends Backbone.View
 
     if @model.responseClassSignature and @model.responseClassSignature != 'string'
       signatureModel =
+        parentId: @model.resourceName.replace(/[\/.]/g, '_'),
+        nickname: @model.nickname,
+        modelAnchor: @model.responseClassSignature,
         sampleJSON: @model.responseSampleJSON
         isParam: false
         signature: @model.responseClassSignature
-        
+
       responseSignatureView = new SignatureView({model: signatureModel, tagName: 'div'})
       $('.model-signature', $(@el)).append responseSignatureView.render().el
     else
@@ -76,7 +79,7 @@ class OperationView extends Backbone.View
 
     for param in @model.parameters
       type = param.type || param.dataType
-      if type.toLowerCase() == 'file'
+      if (type || '').toLowerCase() == 'file'
         if !contentTypeModel.consumes
           log "set content type "
           contentTypeModel.consumes = 'multipart/form-data'
@@ -85,24 +88,24 @@ class OperationView extends Backbone.View
     $('.response-content-type', $(@el)).append responseContentTypeView.render().el
 
     # Render each parameter
-    @addParameter param, contentTypeModel.consumes for param in @model.parameters
+    @addParameter(param, contentTypeModel.consumes, @model) for param in @model.parameters
 
     # Render each response code
-    @addStatusCode statusCode for statusCode in @model.responseMessages
+    @addStatusCode(statusCode, @model) for statusCode in @model.responseMessages
 
     @
 
-  addParameter: (param, consumes) ->
+  addParameter: (param, consumes, container) ->
     # Render a parameter
     param.consumes = consumes
-    paramView = new ParameterView({model: param, tagName: 'tr', readOnly: @model.isReadOnly})
+    paramView = new ParameterView({model: {param: param, container: container}, tagName: 'tr', readOnly: @model.isReadOnly})
     $('.operation-params', $(@el)).append paramView.render().el
 
-  addStatusCode: (statusCode) ->
+  addStatusCode: (statusCode, container) ->
     # Render status codes
-    statusCodeView = new StatusCodeView({model: statusCode, tagName: 'tr'})
+    statusCodeView = new StatusCodeView({model: {statusCode: statusCode, container: container}, tagName: 'tr'})
     $('.operation-status', $(@el)).append statusCodeView.render().el
-  
+
   submitOperation: (e) ->
     e?.preventDefault()
     # Check for errors
@@ -133,7 +136,7 @@ class OperationView extends Backbone.View
         if(o.value? && jQuery.trim(o.value).length > 0)
           map["body"] = o.value
 
-      for o in form.find("select") 
+      for o in form.find("select")
         val = this.getSelectedValue o
         if(val? && jQuery.trim(val).length > 0)
           map[o.name] = val
@@ -150,6 +153,14 @@ class OperationView extends Backbone.View
   success: (response, parent) ->
     parent.showCompleteStatus response
 
+  hideHeaders: (headers) ->
+    headersToShow = {}
+    if headers
+      headersToHide = @options.swaggerOptions?.headersToHide || []
+      for headerKey, headerValue of headers
+        headersToShow[headerKey] = headerValue if headersToHide.indexOf(headerKey) == -1
+    headersToShow
+
   handleFileUpload: (map, form) ->
     for o in form.serializeArray()
       if(o.value? && jQuery.trim(o.value).length > 0)
@@ -162,7 +173,7 @@ class OperationView extends Backbone.View
     # add params
     for param in @model.parameters
       if param.paramType is 'form'
-        if param.type.toLowerCase() isnt 'file' and map[param.name] != undefined
+        if (param.type || '').toLowerCase() isnt 'file' and map[param.name] != undefined
             bodyParam.append(param.name, map[param.name])
 
     # headers in operation
@@ -179,17 +190,20 @@ class OperationView extends Backbone.View
         bodyParam.append($(el).attr('name'), el.files[0])
         params += 1
 
-    @invocationUrl = 
+    @invocationUrl =
       if @model.supportHeaderParams()
         headerParams = @model.getHeaderParams(map)
         @model.urlify(map, false)
       else
         @model.urlify(map, true)
 
-    $(".request_url", $(@el)).html("<pre></pre>") 
+    $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(@invocationUrl);
-    
-    obj = 
+    safeHeaders = @hideHeaders(headerParams)
+    @showContent('json', safeHeaders, ".request_headers", $(this.el))
+    $(".request_body", $(this.el)).html(bodyParam || 'No Content')
+
+    obj =
       type: @model.method
       url: @invocationUrl
       headers: headerParams
@@ -198,10 +212,13 @@ class OperationView extends Backbone.View
       contentType: false
       processData: false
       error: (data, textStatus, error) =>
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showErrorStatus(@wrap(data), @)
       success: (data) =>
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showResponse(data, @)
       complete: (data) =>
+        data.request = { headers: safeHeaders, body: bodyParam }
         @showCompleteStatus(@wrap(data), @)
 
     # apply authorizations
@@ -235,12 +252,12 @@ class OperationView extends Backbone.View
     o
 
   getSelectedValue: (select) ->
-    if !select.multiple 
+    if !select.multiple
       select.value
     else
       options = []
       options.push opt.value for opt in select.options when opt.selected
-      if options.length > 0 
+      if options.length > 0
         options.join ","
       else
         null
@@ -276,7 +293,7 @@ class OperationView extends Backbone.View
     lines = xml.split('\n')
     indent = 0
     lastType = 'other'
-    # 4 types of tags - single, closing, opening, other (text, doctype, comment) - 4*4 = 16 transitions 
+    # 4 types of tags - single, closing, opening, other (text, doctype, comment) - 4*4 = 16 transitions
     transitions =
       'single->single': 0
       'single->closing': -1
@@ -320,9 +337,36 @@ class OperationView extends Backbone.View
           formatted = formatted.substr(0, formatted.length - 1) + ln + '\n'
         else
           formatted += padding + ln + '\n'
-      
+
     formatted
-    
+
+
+  showContent: (contentType, content, query, parent) ->
+    targetElement = $(query, parent)
+    targetElement.removeClass('json')
+    targetElement.removeClass('xml')
+    if !content
+      pre = $('<pre />').text("No Content")
+    else if /json/.test(contentType)
+      try
+        json = if typeof content == 'string' then JSON.parse(content) else content
+        pre = $('<pre class="json" />').text(JSON.stringify(json, null, "  "))
+      catch
+        pre = $('<pre class="json" />').append(content)
+      targetElement.addClass('json')
+    else if /xml/.test(contentType)
+      pre = $('<pre class="xml" />').text(@formatXml(content))
+      targetElement.addClass('xml')
+    else if /html/.test(contentType)
+      pre = $('<pre class="xml" />').html(content)
+      targetElement.addClass('xml')
+    else if /image/.test(contentType)
+      pre = $('<img>').attr('src',url)
+    else
+      # don't know what to render!
+      pre = $('<pre class="json" />').text(content)
+      targetElement.addClass('json')
+    targetElement.html(pre)
 
   # puts the response data in UI
   showStatus: (response) ->
@@ -335,37 +379,28 @@ class OperationView extends Backbone.View
     headers = response.headers
 
     # if server is nice, and sends content-type back, we can use it
-    contentType = if headers && headers["Content-Type"] then headers["Content-Type"].split(";")[0].trim() else null
+    contentType = if headers && headers["Content-Type"] then headers["Content-Type"] else null
+    requestContentType = 'json'
+    if response.request && response.request.headers
+      requestContentType = response.request.headers['Content-Type'] || 'json'
 
-    if !content
-      code = $('<code />').text("no content")
-      pre = $('<pre class="json" />').append(code)
-    else if contentType is "application/json" || /\+json$/.test(contentType)
-      code = $('<code />').text(JSON.stringify(JSON.parse(content), null, "  "))
-      pre = $('<pre class="json" />').append(code)
-    else if contentType is "application/xml" || /\+xml$/.test(contentType)
-      code = $('<code />').text(@formatXml(content))
-      pre = $('<pre class="xml" />').append(code)
-    else if contentType is "text/html"
-      code = $('<code />').html(content)
-      pre = $('<pre class="xml" />').append(code)
-    else if /^image\//.test(contentType)
-      pre = $('<img>').attr('src',url)
-    else
-      # don't know what to render!
-      code = $('<code />').text(content)
-      pre = $('<pre class="json" />').append(code)
-
-    response_body = pre
-    $(".request_url", $(@el)).html("<pre></pre>") 
+    $(".request_url", $(@el)).html("<pre></pre>")
     $(".request_url pre", $(@el)).text(url);
+    @showContent(requestContentType, response.request && response.request.body, ".request_body", $(@el))
+    @showContent('json', response.request && @hideHeaders(response.request.headers), ".request_headers", $(@el))
     $(".response_code", $(@el)).html "<pre>" + response.status + "</pre>"
-    $(".response_body", $(@el)).html response_body
-    $(".response_headers", $(@el)).html "<pre>" + _.escape(JSON.stringify(response.headers, null, "  ")).replace(/\n/g, "<br>") + "</pre>"
+    @showContent(contentType, content, ".response_body", $(@el))
+    @showContent('json', @hideHeaders(response.headers), ".response_headers", $(@el))
     $(".response", $(@el)).slideDown()
     $(".response_hider", $(@el)).show()
     $(".response_throbber", $(@el)).hide()
+    request_headers_el = $('.request_headers', $(@el))[0]
+    request_body_el = $('.request_body', $(@el))[0]
+    response_headers = $('.response_headers', $(@el))[0]
     response_body_el = $('.response_body', $(@el))[0]
+    hljs.highlightBlock(request_headers_el)
+    hljs.highlightBlock(request_body_el)
+    hljs.highlightBlock(response_headers)
     # only highlight the response if response is less than threshold, default state is highlight response
     opts = @options.swaggerOptions
     if opts.highlightSizeThreshold && response.data.length > opts.highlightSizeThreshold then response_body_el else hljs.highlightBlock(response_body_el)

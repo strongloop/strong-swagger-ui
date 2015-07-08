@@ -42,7 +42,7 @@ class SwaggerUi extends Backbone.Router
     # Initialize the API object
     @mainView?.clear()
     url = @options.url
-    if url.indexOf("http") isnt 0
+    if url.indexOf("http") isnt 0 && url.indexOf("file") isnt 0
       url = @buildUrl(window.location.href.toString(), url)
 
     @options.url = url
@@ -87,13 +87,23 @@ class SwaggerUi extends Backbone.Router
   # Shows message on topbar of the ui
   showMessage: (data = '') ->
     $('#message-bar').removeClass 'message-fail'
-    $('#message-bar').addClass 'message-success'
+    $('#message-bar').removeClass 'message-none'
+    $('#message-bar').removeClass 'message-success'
+    if data.length > 0
+      $('#message-bar').addClass 'message-success'
+    else
+      $('#message-bar').addClass 'message-none'
     $('#message-bar').html data
 
   # shows message in red
   onLoadFailure: (data = '') ->
+    $('#message-bar').removeClass 'message-fail'
+    $('#message-bar').removeClass 'message-none'
     $('#message-bar').removeClass 'message-success'
-    $('#message-bar').addClass 'message-fail'
+    if data.length > 0
+      $('#message-bar').addClass 'message-fail'
+    else
+      $('#message-bar').addClass 'message-none'
     val = $('#message-bar').html data
     @options.onFailure(data) if @options.onFailure?
     val
