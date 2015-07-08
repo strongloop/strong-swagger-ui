@@ -21,7 +21,7 @@
     "cake": "^0.1.1",
     "coffee-script": "~1.6.3",
     "handlebars": "~1.0.10",
-    "less": "~1.4.2",
+    "less": "^2.5.1",
     "strong-swagger-client": "^20.0.0"
   }
 }

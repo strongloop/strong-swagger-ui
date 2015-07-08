@@ -82,16 +82,23 @@ task 'dist', 'Build a distribution', ->
               throw err if err
               lessc()
 
+  lessFile = (name) ->
+    opts =
+      filename: 'src/main/less/' + name
+
+    less.render fs.readFileSync(opts.filename, 'utf8'), opts, (err, output) ->
+      outfile = 'src/main/html/css/' + path.basename(name, path.extname(name)) + '.css'
+      fs.writeFileSync(outfile, output.css)
+
   lessc = ->
     # Someone who knows CoffeeScript should make this more Coffee-licious
     console.log '   : Compiling LESS...'
 
     if !fs.existsSync 'src/main/html/css'
       fs.mkdirSync 'src/main/html/css'
-    less.render fs.readFileSync("src/main/less/screen.less", 'utf8'), (err, css) ->
-      fs.writeFileSync("src/main/html/css/screen.css", css)
-    less.render fs.readFileSync("src/main/less/reset.less", 'utf8'), (err, css) ->
-      fs.writeFileSync("src/main/html/css/reset.css", css)
+
+    lessFile 'screen.less'
+    lessFile 'reset.less'
     pack()
 
   pack = ->
