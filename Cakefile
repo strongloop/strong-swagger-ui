@@ -85,6 +85,9 @@ task 'dist', 'Build a distribution', ->
   lessFile = (name) ->
     opts =
       filename: 'src/main/less/' + name
+      paths: [
+        'src/main/html/css'
+      ]
 
     less.render fs.readFileSync(opts.filename, 'utf8'), opts, (err, output) ->
       outfile = 'src/main/html/css/' + path.basename(name, path.extname(name)) + '.css'
