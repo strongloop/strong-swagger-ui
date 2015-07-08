@@ -98,7 +98,7 @@ task 'dist', 'Build a distribution', ->
     console.log '   : Packaging...'
     exec 'cp -r lib dist'
     console.log '   : Copied swagger-ui libs'
-    exec 'cp -r node_modules/swagger-client/lib/swagger.js dist/lib'
+    exec 'cp -r node_modules/strong-swagger-client/lib/swagger.js dist/lib'
     console.log '   : Copied swagger dependencies'
     exec 'cp -r src/main/html/* dist'
     console.log '   : Copied html dependencies'
