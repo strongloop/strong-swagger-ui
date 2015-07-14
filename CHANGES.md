@@ -1,3 +1,15 @@
+2015-07-14, Version 20.0.1
+==========================
+
+ * Fix build on Node v0.12 and io.js (Miroslav Bajtoš)
+
+ * Move padding from index.html to CSS (Miroslav Bajtoš)
+
+ * Embed throbber.gif in CSS via data-uri (Miroslav Bajtoš)
+
+ * Upgrade less to 2.5 (latest) (Miroslav Bajtoš)
+
+
 2015-07-08, Version 20.0.0
 ==========================
 
