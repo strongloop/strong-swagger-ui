@@ -6,4 +6,6 @@ example.html
 .npmignore
 *.swp
 npm-debug.log
+dist/sample.html
+dist/spec.js
 node_modules
