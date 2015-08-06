@@ -1,23 +1,18 @@
 <div>
 <ul class="signature-nav">
-    <li>{{{modelLabel}}}</li>
-    {{#if signature}}
-    <li><a class="description-link" href="#!/{{parentId}}/{{nickname}}/{{modelAnchor}}" id="{{parentId}}_{{nickname}}_{{modelAnchor}}">Model</a></li>
-    {{/if}}
-    {{#if sampleJSON}}
-    <li><a class="snippet-link">Sample</a></li>
-    {{/if}}
+  <li><a class="description-link" href="#" data-sw-translate>Model</a></li>
+  <li><a class="snippet-link" href="#" data-sw-translate>Model Schema</a></li>
 </ul>
 <div>
 
 <div class="signature-container">
-    <div class="description">
-        {{{signature}}}
-    </div>
+  <div class="description">
+    {{{signature}}}
+  </div>
 
-    <div class="snippet">
-        <pre><code>{{sampleJSON}}</code></pre>
-        <small class="notice"></small>
-    </div>
+  <div class="snippet">
+    <pre><code>{{sampleJSON}}</code></pre>
+    <small class="notice"></small>
+  </div>
 </div>
 

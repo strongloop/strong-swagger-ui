@@ -1,42 +1,28 @@
 <div class='heading'>
   <h2>
-    <a href='#!/{{id}}' class="toggleContent" data-id="{{id}}">{{name}} {{#description}} : {{/description}}{{{description}}}</a>
+    <a href='#!/{{id}}' class="toggleEndpointList" data-id="{{id}}">{{name}}</a> {{#summary}} : {{/summary}}{{{summary}}}
   </h2>
   <ul class='options'>
     <li>
-      <a href='#!/{{id}}' id='contentTogger_{{id}}' class="toggleContent" data-id="{{id}}">Show/Hide</a>
+      <a href='#!/{{id}}' id='endpointListTogger_{{id}}' class="toggleEndpointList" data-id="{{id}}" data-sw-translate>Show/Hide</a>
     </li>
     <li>
-      <a href='#' class="collapseResource" data-id="{{id}}">
+      <a href='#' class="collapseResource" data-id="{{id}}" data-sw-translate>
         List Operations
       </a>
     </li>
     <li>
-      <a href='#' class="expandResource" data-id={{id}}>
+      <a href='#' class="expandResource" data-id="{{id}}" data-sw-translate>
         Expand Operations
       </a>
     </li>
+    {{#if url}}
     <li>
-      <a href='{{url}}'>Raw</a>
+      <a href='{{url}}' data-sw-translate>Raw</a>
     </li>
+    {{/if}}
   </ul>
 </div>
-<div class='resourceContent' style='display:none'>
-  <div class='basePaths' style='display:none'>
-    <h4>Base Paths</h4>
-    <table class="fullwidth">
-      <thead>
-        <tr>
-          <th style="width: 20%">Environment</th>
-          <th style="width: 80%">Base Path</th>
-        </tr>
-      </thead>
-      <tbody class="basePath-Values" id='{{id}}_basePath_container'>
+<ul class='endpoints' id='{{id}}_endpoint_list' style='display:none'>
 
-      </tbody>
-    </table>
-  </div>
-  <ul class='endpoints' id='{{id}}_endpoint_list'>
-
-  </ul>
-</div>
+</ul>
