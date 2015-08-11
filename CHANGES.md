@@ -1,3 +1,1130 @@
+2015-08-11, Version 21.0.0-dev.1
+================================
+
+ * Add missing jshint dev-dependency (Miroslav Bajtoš)
+
+ * Revert "bump strong-swagger-client dep" (Miroslav Bajtoš)
+
+ * Disable tests on Jenkins slaves w/o browser (Miroslav Bajtoš)
+
+ * bump strong-swagger-client dep (Ryan Graham)
+
+ * Update README.md (Ron)
+
+ * Update CONTRIBUTING.md (Ron)
+
+ * Fix timing issues in unit-tests (Miroslav Bajtoš)
+
+ * Issue #1423: responses containing references to definitions were not being fully resolved when the spec was pulled in over AJAX but was working locally. OperationView.render()'s parsing of the responses was just checking if the ref _started_ with '#/definitions/', not whether it contained it, and when pulled in over AJAX the refs have the URL prepended to them (Aaron Baker)
+
+ * Fix build on Node v0.12 and io.js (Miroslav Bajtoš)
+
+ * Move padding from index.html to CSS (Miroslav Bajtoš)
+
+ * Embed throbber.gif in CSS via data-uri (Miroslav Bajtoš)
+
+ * Upgrade less to 2.5 (latest) (Miroslav Bajtoš)
+
+ * Fix "Expand Operations" link (Miroslav Bajtoš)
+
+ * Use strong-swagger-client instead of swagger-client (Miroslav Bajtoš)
+
+ * Add back maxwidth in standalone mode (Miroslav Bajtoš)
+
+ * Refactored to visualize more parameter and property restrictions (Shelby Sanders)
+
+ * Corrected to replace '/' and '.' in anchors, since they break the shebang logic (Shelby Sanders)
+
+ * Changed to never show Response Class, because it must be in Swagger Spec for Code Gen to work (Shelby Sanders)
+
+ * Added better higlight of required params, with indication other than color/weight, and support for select and read-only (Shelby Sanders)
+
+ * Corrected shebang() to avoid closing Model when called an even number of times (Shelby Sanders)
+
+ * Added option for headersToHide in order to optionally hide arbitrary headers (e.g. Authorization) (Shelby Sanders)
+
+ * Corrected to actually show request headers and body, rearranged sections based on probability of reference (Shelby Sanders)
+
+ * Add default padding for when not embedded (Shelby Sanders)
+
+ * Added better highlighting and padding for preformatted JSON and XML (Shelby Sanders)
+
+ * Corrected styling of title and description, and refactored to remove with restrictions (Shelby Sanders)
+
+ * Added support for HTML in title, renamed footer to info_server avoiding conflict with Bootstrap, and corrected replacement of array[ (Shelby Sanders)
+
+ * make wider and show request parts (Nicolas Duchastel de Montrouge)
+
+ * Changed to protect against missing  when checking for file uploads (Shelby Sanders)
+
+ * Added support for basePaths to document across multiple environments (Shelby Sanders)
+
+ * Refactored column widths to better use space for likely growing content (Shelby Sanders)
+
+ * Added support for anchoring to first reference of a Model (Shelby Sanders)
+
+ * Defer creation of signature and sampleJSON, so all Models will be loaded (Shelby Sanders)
+
+ * Omit divs for info.title and info.description if they're absent (Shelby Sanders)
+
+ * Removed inappropriate commas from sorters (Shelby Sanders)
+
+ * Corrected to avoid showing invalid Model and Model Schema is missing or void (Shelby Sanders)
+
+ * Added guard against null mockSignature (Shelby Sanders)
+
+ * Removed 'Implementation Notes' label since it's just noise, widened Resource expansion anchor to full label (Shelby Sanders)
+
+ * Corrected to work when loading resources from file:// (Shelby Sanders)
+
+ * Added support for primitives in StatusCodeView (Shelby Sanders)
+
+ * Add support for toggling Model and Schema, instead of just expanding (Shelby Sanders)
+
+ * Ensure Response Content Type is shown regardless of Response Class (Shelby Sanders)
+
+ * Collapse and label responseModel description by default (Shelby Sanders)
+
+ * Added support for multiple responseMessages from Swagger 1.2 (Shelby Sanders)
+
+ * Changed to hide the message-bar when no message (Miroslav Bajtoš)
+
+ * Add minimal test (Miroslav Bajtoš)
+
+ * Remove src/main/css from version control. (Miroslav Bajtoš)
+
+ * Remove lib/swagger.js from version control (Miroslav Bajtoš)
+
+ * Rename the module to strong-swagger-ui (Miroslav Bajtoš)
+
+ * Fix project infrastructure (Miroslav Bajtoš)
+
+
+2015-07-22, Version 2.1.1
+=========================
+
+ * updated versions (Tony Tam)
+
+ * Missing "Headers" translation (Francisco Guimarães)
+
+ * Fix merge (Francisco Guimarães)
+
+ * Missing some data-sw-translation (Francisco Guimarães)
+
+ * dist (Francisco Guimarães)
+
+ * Missing some data-sw-translation at templates (Francisco Guimarães)
+
+ * Build (Francisco Guimarães)
+
+ * merged from swagger-api (Francisco Guimarães)
+
+ * missing some data-sw-translation (Francisco Guimarães)
+
+ * merged (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * Revert "Updating documentation based on issue swagger-ui issue #1414" (Tony Tam)
+
+ * merged to develop_2.0 (Tony Tam)
+
+ * Changes at src (Francisco Guimarães)
+
+ * Translation (Francisco Guimarães)
+
+ * Include pt translation (Francisco Guimarães)
+
+ * Move pt to dist (Francisco Guimarães)
+
+ * Move to dist (Francisco Guimarães)
+
+ * PT localization (Francisco Guimarães)
+
+ * Added built files (sonicd300)
+
+ * Added flexible scope separator (sonicd300)
+
+ * Spelling and closing tag fixes (Taras Katkov)
+
+ * Fix value for window.location.protocol. (Lucian Hontau)
+
+ * Add support for oauth client secret when calling the token URL. Fixes #1384. Fixes #1324. (Lucian Hontau)
+
+ * Updating documentation based on issue swagger-ui issue #1414 (Mike Dalrymple)
+
+ * Improve the language in CONTRIBUTING.md (Andreas Kohn)
+
+ * Use a SPDX-compatible identifier for the 'license' value (Andreas Kohn)
+
+ * regenerated (aurelian)
+
+ * ignore case. (aurelian)
+
+ * X-data-* vendor extension for parameter objects (aurelian)
+
+ * Fix #1394: A bug in IE 10/11 causes the placeholder text to be copied to "value" (Praseeth T)
+
+ * removed superfluous quote (Vladimir L)
+
+ * OAuth flow only selected scopes should be sent to Authorize endpoint #1388. Need to clear out previous popupDialog nodes, so previous checkboxes won't be considered. (Tom Baker)
+
+ * Found a bug in OperationView.js which caused the oAuth toggle to be displayed for non-oAuth endpoints if oAuth was enabled at all, fixed it (Robert Brownstein)
+
+ * Update README.md (Ron)
+
+ * Spelling is hard (Rob Richardson)
+
+ * fix lint issue (Josh Ponelat)
+
+ * build with translator support (Josh Ponelat)
+
+ * add lang to gulpfile (Josh Ponelat)
+
+ * add data-sw-translate to templates (Josh Ponelat)
+
+ * Translation to Spanish finished (Ignacio Peluffo)
+
+ * Some words translation added (ipeluffo)
+
+ * Spanish translation added (ipeluffo)
+
+ * removed unnesessary logic, replaced by CSS style (Vladimir L)
+
+ * fixed issue with OAuth hint (Vladimir L)
+
+ * Remove moot `version` property from bower.json dev branch (Kevin Kirsche)
+
+
+2015-06-06, Version 2.1.0
+=========================
+
+ * updated versions, rebuilt (Tony Tam)
+
+ * removed extra tag (Tony Tam)
+
+ * removed logging (Tony Tam)
+
+ * updated version (Tony Tam)
+
+ * Update swagger-ui to reuse client authorizations properly (Jeremy Whitlock)
+
+ * remove dead code: show-wordnik-dev (Josh Ponelat)
+
+ * Updated project location (Ron)
+
+ * Updated ToS (Ron)
+
+ * Updated License (Ron)
+
+ * finish removing bootstrap.min entirely (Josh Ponelat)
+
+ * removed unused bootstrap.min.js file (Shawn Gong)
+
+ * fixed support for default values in param_list (Josh Ponelat)
+
+ * fix for lint errors (Tony Tam)
+
+ * merged (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * rewrote into source files, generate using gulp (Shawn Gong)
+
+ * use $.text instead of $.html for showMessage and onFailure (Josh Ponelat)
+
+ * rewrote using asCurl (Shawn Gong)
+
+ * Update translator.js (bnupaladin)
+
+ * curl hack to showcase curl output in the swagger-ui (Shawn Gong)
+
+ * Update README.md (Ron)
+
+ * updated validator badge logic per #1299 (Tony Tam)
+
+ * remove fileupload function (Vitaliy Kanev)
+
+ * fixed: REFACTOR handleFileUpload (Vitaliy Kanev)
+
+ * 508 Fixes (Joe Wolf)
+
+ * fixes #693 (Nara Kasbergen)
+
+ * fixes #958 (Nara Kasbergen)
+
+ * Add support for GFM syntax in model (schema) descriptions -- relies on one small change to swagger-client (Nara Kasbergen)
+
+
+2015-05-14, Version 2.1.5-M2
+============================
+
+ * rebuilt (Tony Tam)
+
+ * added authorizations (Tony Tam)
+
+ * Just realized this adds some extra horizontal padding which may not be desirable, so this fixes that (Nara Kasbergen)
+
+ * Fixes #1233 (Nara Kasbergen)
+
+ * Fixes #1268 (Nara Kasbergen)
+
+ * Use the correct new sorting parameter name (Nara Kasbergen)
+
+
+2015-05-13, Version 2.1.4-M2
+============================
+
+ * rebuilt (Tony Tam)
+
+ * merged (Tony Tam)
+
+ * updated versions for patch release (Tony Tam)
+
+ * fixed MainView for ES5 browser. (Matthias Le Brun)
+
+
+2015-05-13, Version 2.1.3-M2
+============================
+
+ * updated swagger-js, rebuilt (Tony Tam)
+
+ * fix for #1257 (Tony Tam)
+
+
+2015-05-08, Version 2.1.2-M2
+============================
+
+ * updated swagger-client version (Tony Tam)
+
+ * set highlight threshold per #1184 (Tony Tam)
+
+ * updated per #931 (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * merged #1238 (Tony Tam)
+
+ * merged (Tony Tam)
+
+ * merged logic from #1177 (Tony Tam)
+
+ * fix for #1253 (Tony Tam)
+
+ * added fix from outdated PR #1122 (Tony Tam)
+
+ * Fix for #1252, check for http protocol before setting validator url (Tony Tam)
+
+ * manually added #1086, #1089 (Tony Tam)
+
+ * fixes #1205, remove dead line (Josh Ponelat)
+
+ * uncomment swagger-oauth and add script (Josh Ponelat)
+
+ * add jshint to gulp..lint and dist (Josh Ponelat)
+
+ * fix #1191, forgot to put returns on handlebar helper (Josh Ponelat)
+
+ * Forcing old images to not be CRLF conformed due to new gitattributes file. (Bryan Hazelbaker)
+
+ * created files in dist (Merlin Göttlinger)
+
+ * Fix for #1113 (mgttlinger)
+
+ * updated version (Tony Tam)
+
+ * Use jQuery for trimming (Björn Rochel)
+
+ * Prevent the OperationView to display an error in case the response contains a whitespace only body with content type application/json (Bjoern Rochel)
+
+ * Corrected for Travis build. (Waldek Kozba)
+
+ * Multiple values for array type parameters as separated lines in the textarea. Improved required parameter handling for the array type. Improved default value handling for the array type. (Waldek Kozba)
+
+ * Pass empty object to guard the case when options.swaggerOptions is undefined (aurelian)
+
+ * Pass swagger options to swagger-js Operation#execute method (aurelian)
+
+
+2015-04-16, Version 2.1.1-M2
+============================
+
+ * rebuilt (Tony Tam)
+
+ * merged with master (Tony Tam)
+
+ * removed text files from binary attribute (Tony Tam)
+
+ * updated versions (Tony Tam)
+
+ * updated from master (Tony Tam)
+
+ * Add API Key auth in onComplete callback of SwaggerUI#load call (Mohsen Azimi)
+
+ * Support plain text in response (Mohsen Azimi)
+
+ * Fix issue #1132 "JS error when testing uploadFile method (http://petstore.swagger.io/#!/pet/uploadFile)" (Mohsen Azimi)
+
+ * Fix issue #1160 "piKey is not set when Explore button is clicked " (Mohsen Azimi)
+
+ * Call to swaggerUi.load before possible use. (Sebastian Ortiz)
+
+ * updated client version (Tony Tam)
+
+ * Fix - Swagger/Swashbuckle OAuth2 Authorizations not set #1134 (vprefournier)
+
+ * Update default validator with correct protocol (shuisman)
+
+
+2015-03-30, Version 2.1.0-M2
+============================
+
+ * rebuilt (Tony Tam)
+
+ * fixed binary for images (Tony Tam)
+
+ * replaced corrupt images (Tony Tam)
+
+ * Fix images and add all images as binary to gitattributes (Mohsen Azimi)
+
+ * prepare for release (Tony Tam)
+
+ * Update TravisCI badge to show only master result and remove CoffeeScript references (Mohsen Azimi)
+
+ * updated package, rebuilt (Tony Tam)
+
+ * Cleanup package.json (Mohsen Azimi)
+
+ * removed shred (Tony Tam)
+
+ * updated links (Tony Tam)
+
+ * Fix JSHint issues (Mohsen Azimi)
+
+ * Add link innerText (Mohsen Azimi)
+
+ * Add support for downloading via Blob (Mohsen Azimi)
+
+ * Add file download to try operation (Mohsen Azimi)
+
+ * Update .travis.yml (Tony Tam)
+
+ * xit out tests that are failing due to SwaggerJS (Mohsen Azimi)
+
+ * Use node_modules/.bin for binary executions in scripts of package.json (Mohsen Azimi)
+
+ * Append .json to v1 spec files to enforce Content-Type when serving in test (Mohsen Azimi)
+
+ * Use SwaggerJS from npm (Mohsen Azimi)
+
+ * Fixing sorter typo (Dan Rice)
+
+ * Rename redirectUrl optoon to oauth2RedirectUrl (Mohsen Azimi)
+
+ * Add ability to override redirectUrl in swagger-oauth (Mohsen Azimi)
+
+ * Make SwaggerUi UMD compatible (Mohsen Azimi)
+
+ * Fix typos in SwaggerUi.js (Mohsen Azimi)
+
+ * operation.handlebars: Using a <div> around {{{description}}} is more robust to            potential HTML tags cannot be nested within the <p> context. (Livio Soares)
+
+ * Fix #1040 : add options to be able to sort APIs and operations (Julien Maurel)
+
+ * OperatioView.js: fix rendering of Markdown (GFM) in description fields. (Livio Soares)
+
+ * fixed build error (Tony Tam)
+
+ * merged (Tony Tam)
+
+ * Normalize all the line endings (Mohsen Azimi)
+
+ * Add .gitattributes file (Mohsen Azimi)
+
+ * Encode/decode tags before using it in the URL (Mohsen Azimi)
+
+ * Move  backward compatibility to swaggerUi.js and warn users about API changes (Mohsen Azimi)
+
+ * fix for #968, removed block (Tony Tam)
+
+ * Append swagger-auth global functions to window and don't break backward (Mohsen Azimi)
+
+ * Append `Docs` to window for now (Mohsen Azimi)
+
+ * Remove all references to `swaggerUi` global instance (Mohsen Azimi)
+
+ * Update docs (Mohsen Azimi)
+
+ * Remove global auth object references and fix header api key adding mechanism (Mohsen Azimi)
+
+ * Pass router to all views (Mohsen Azimi)
+
+ * Remove CoffeeScript folder (Mohsen Azimi)
+
+ * Wrap all SwaggerUI code in a iife (Mohsen Azimi)
+
+ * Fix V2 test (Mohsen Azimi)
+
+ * Run  JSHint in TravisCi (Mohsen Azimi)
+
+ * JSHintify test (Mohsen Azimi)
+
+ * Fix all JSHint errors (Mohsen Azimi)
+
+ * Some cleanup in Docs.js (Mohsen Azimi)
+
+ * Remove global views (Mohsen Azimi)
+
+ * Remove [].forEach calls (Mohsen Azimi)
+
+ * Fix binding error in swagger-js file (Mohsen Azimi)
+
+ * remove coffeescript from build process (Mohsen Azimi)
+
+ * Fix JS errors in source (Mohsen Azimi)
+
+ * Move all files to javascript folder and remove coffeescript folder (Mohsen Azimi)
+
+ * Convert view/OperationView.coffee (Mohsen Azimi)
+
+ * Convert view/ParameterView.coffee (Mohsen Azimi)
+
+ * Convert view/ParameterContentTypeView.coffee (Mohsen Azimi)
+
+ * Convert view/ResourceView.coffee (Mohsen Azimi)
+
+ * Convert view/SignatureView.coffee (Mohsen Azimi)
+
+ * Convert view/StatusCodeView.coffee (Mohsen Azimi)
+
+ * Convert view/ResponseContentTypeView.coffee (Mohsen Azimi)
+
+ * Convert view/MainView.coffee (Mohsen Azimi)
+
+ * Convert view/HeaderView.coffee (Mohsen Azimi)
+
+ * Convert view/ContentTypeView.coffee (Mohsen Azimi)
+
+ * Convert view/BasicAuthButton.coffee (Mohsen Azimi)
+
+ * Convert view/ApiKeyButton.coffee (Mohsen Azimi)
+
+ * Convert helpers/handlebars.coffee (Mohsen Azimi)
+
+ * Convert SwaggerUI.js and introduce JSHint (Mohsen Azimi)
+
+ * Update swagger-js with latest (Jeremy Whitlock)
+
+ * Fix issue with $.contains in Firefox (Mohsen Azimi)
+
+ * Remove global references to swaggerUi object (Mohsen Azimi)
+
+ * Update favicon with official logo and HiDPI support (Mohsen Azimi)
+
+ * Bring back "Raw" link for 1.2 specs (Mohsen Azimi)
+
+ * Add browser support information (Mohsen Azimi)
+
+ * encodeURIComponent on api_key (LASSALLE Nicolas)
+
+ * Render externalDocs when it's available (Mohsen Azimi)
+
+ * Render response headers (Mohsen Azimi)
+
+ * Add generated print CSS file in src/main/html/css/ (Mohsen Azimi)
+
+ * Add bower.json (Mohsen Azimi)
+
+ * increase TravisCI timeout to 20s (Mohsen Azimi)
+
+ * increase TravisCI timeout to 10s (Mohsen Azimi)
+
+ * Increase timeout for server launch in TravisCI (Mohsen Azimi)
+
+ * Refactor tests (Mohsen Azimi)
+
+ * update dependency and test in node 0.12 (Mohsen Azimi)
+
+ * Add a link to releases for CHANGELOG (Mohsen Azimi)
+
+ * Show master branch build badge (Mohsen Azimi)
+
+ * add print style sheet (Nuno Vieira)
+
+ * made space-delimited (Tony Tam)
+
+ * Oauth 2.0: use space as delimiter for scopes. (Ivan Goncharov)
+
+ * reverted files (Tony Tam)
+
+ * updated js lib (Tony Tam)
+
+ * user gulp-order to produce ordered template (Mohsen Azimi)
+
+ * Add 'required' class to list parameter if it's required (Mohsen Azimi)
+
+ * When running `gulp watch` watch handlebars file changes too (Mohsen Azimi)
+
+ * Set marked options to render GFM correctly (Mohsen Azimi)
+
+ * Add underscore source map file (Mohsen Azimi)
+
+ * updated client for remote ref support (Tony Tam)
+
+ * updated version (Tony Tam)
+
+ * updated version, client (Tony Tam)
+
+ * fix for #944, form data with 2.0 spec (Tony Tam)
+
+ * prepare for file upload in swagger-js (Tony Tam)
+
+ * added tags to test (Tony Tam)
+
+ * updated client (Tony Tam)
+
+ * Update README.md (Ron)
+
+ * rebuild (Tony Tam)
+
+ * updated from master (Tony Tam)
+
+ * moved from render to init method (Tony Tam)
+
+ * reduced timeout (Tony Tam)
+
+ * Fix OAuth2 login when no scope is defined (Stefano Travelli)
+
+ * Appended the checks of existing of translated attributes (Константин Калинин)
+
+ * rebuilt client (Tony Tam)
+
+ * Create CONTRIBUTING.md (Mohsen Azimi)
+
+ * merg (Константин Калинин)
+
+ * readme (Константин Калинин)
+
+ * codestyle (Константин Калинин)
+
+ * Adding (ignored) oauth2 state parameter. (Thijs Van der Schaeghe)
+
+ * merge (Константин Калинин)
+
+ * translated of title-attribute and extended a list ow known lexemes (Константин Калинин)
+
+ * more phrases (Константин Калинин)
+
+ * add simple translation support (Константин Калинин)
+
+ * If possible, support audio content types (Vincent Pizzo)
+
+
+2015-02-21, Version 2.1.8-M1
+============================
+
+ * updated client for remote ref support (Tony Tam)
+
+
+2015-02-21, Version 2.1.7-M1
+============================
+
+ * updated version (Tony Tam)
+
+
+2015-02-21, Version 2.1.6-M1
+============================
+
+ * rebuilt (Tony Tam)
+
+ * updated client (Tony Tam)
+
+ * updated version, client (Tony Tam)
+
+ * fix for #944, form data with 2.0 spec (Tony Tam)
+
+ * prepare for file upload in swagger-js (Tony Tam)
+
+ * merged from develop_2.0 (Tony Tam)
+
+ * updated version (Tony Tam)
+
+ * added tags to test (Tony Tam)
+
+ * Update README.md (Ron)
+
+
+2015-02-18, Version 2.1.5-M1
+============================
+
+ * rebuild (Tony Tam)
+
+ * merged from develop_2.0 (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * updated from master (Tony Tam)
+
+ * removed bin folder (Tony Tam)
+
+ * moved from render to init method (Tony Tam)
+
+ * reduced timeout (Tony Tam)
+
+ * Fix OAuth2 login when no scope is defined (Stefano Travelli)
+
+ * Update README.md (Ron)
+
+ * Update LICENSE (Ron)
+
+
+2015-02-12, Version 2.1.4-M1
+============================
+
+ * test for #932 (Tony Tam)
+
+ * updated version (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * updated client lib (Tony Tam)
+
+ * fixed rendering to support latest client for #932 (Tony Tam)
+
+
+2015-02-11, Version 2.1.3-M1
+============================
+
+ * updated versions (Tony Tam)
+
+ * updated files (Tony Tam)
+
+ * Include redirect_uri in access token request for OAuth2 authentication. (Stefano Travelli)
+
+
+2015-02-09, Version 2.1.2-M1
+============================
+
+ * updated client, version (Tony Tam)
+
+ * added fix for #916 by copying identifiers instead of using references (Tony Tam)
+
+ * fixes to docker installation (Akshat Aranya)
+
+
+2015-02-02, Version 2.1.1-M1
+============================
+
+ * rebuilt (Tony Tam)
+
+ * updated js library to 2.1.1-M1 (Tony Tam)
+
+ * added array check for #899 (Tony Tam)
+
+ * added gulp-header to write metadata in comments of output library #900 (Tony Tam)
+
+ * updated swagger-js to fix header (Tony Tam)
+
+ * merged from develop_2.0 (Tony Tam)
+
+ * Update README.md (Ron)
+
+ * Update LICENSE (Ron)
+
+ * added travis (Tony Tam)
+
+ * updated package version, readme (Tony Tam)
+
+ * fix for #640 (Tony Tam)
+
+ * removed log (Tony Tam)
+
+ * fixed body param (Tony Tam)
+
+ * unified client (Tony Tam)
+
+ * updated lib (Tony Tam)
+
+ * formatting (Tony Tam)
+
+ * updated mocha (Tony Tam)
+
+ * moved tests, added 1.x, 2.0 (Tony Tam)
+
+ * More test + fix decodeURIComponent call (Mohsen Azimi)
+
+ * a build (Mohsen Azimi)
+
+ * decode encoded URLs (Mohsen Azimi)
+
+ * Sleep instead of wait (Mohsen Azimi)
+
+ * Take out `checkConsoleErrors` from inside title check (Mohsen Azimi)
+
+ * updated test to check console errors after loading (Tony Tam)
+
+ * removed unnecessary logging (Tony Tam)
+
+ * rebuilt distro (Tony Tam)
+
+ * Fix backbone compability issue (Mohsen Azimi)
+
+ * Don't fail with the first browser error. (Mohsen Azimi)
+
+ * new build (Mohsen Azimi)
+
+ * Add test for console errors (Mohsen Azimi)
+
+ * regenerated files (Tony Tam)
+
+ * Define default email subject in contact link (Matti Schneider)
+
+ * fix for #517 (Tony Tam)
+
+ * Upgrade to backbone@1.1. (Mohsen Azimi)
+
+ * Upgrade to underscore.js@1.7 (Mohsen Azimi)
+
+ * fix for #593 (Tony Tam)
+
+ * PR #660 made to develop_2.0 (Mohsen Azimi)
+
+ * New build with gulp (Mohsen Azimi)
+
+ * added contact.name, email to template (Tony Tam)
+
+ * fix for #819 (Tony Tam)
+
+ * added files from #862 (Tony Tam)
+
+ * fixes for #859, ie compat (Tony Tam)
+
+ * updated for #849 (Tony Tam)
+
+ * updated for #852 (Tony Tam)
+
+ * fix for #855 (Tony Tam)
+
+ * Add documentation and npm script for gulp (Mohsen Azimi)
+
+ * Add `gulp serve` (Mohsen Azimi)
+
+ * fixed return type (Tony Tam)
+
+ * Add `gulp watch` (Mohsen Azimi)
+
+ * updated lib to address content types (Tony Tam)
+
+ * fix for #484, reset class for response container when switching media types (Tony Tam)
+
+ * Do clean task before any other task (Mohsen Azimi)
+
+ * Update Swagger Client (Mohsen Azimi)
+
+ * Cleanup and add update docs (Mohsen Azimi)
+
+ * Finish "gulp" command (Mohsen Azimi)
+
+ * Add templates (Mohsen Azimi)
+
+ * Add less and copy html files (Mohsen Azimi)
+
+ * Add gulfile.js (Mohsen Azimi)
+
+ * rebuilt file (Tony Tam)
+
+ * merged into swagger-js (Tony Tam)
+
+ * Update README.md (Tony Tam)
+
+ * Oauth2 changes to support accessCode flow (Brian Shamblen)
+
+ * Added hover over popup to display property validation attributes (Brian Shamblen)
+
+ * updated swagger-client lib, index fonts (Tony Tam)
+
+ * merged from develop, #824 (Tony Tam)
+
+ * fixed build, dist (Tony Tam)
+
+ * merged files (Tony Tam)
+
+ * merged (Tony Tam)
+
+ * add local google font cache (Gen Liu)
+
+ * remove google web font (gengen1988)
+
+ * manual merge #654 (Tony Tam)
+
+ * Add ncp to npm dependencie (Mohsen Azimi)
+
+ * Add build badge (Mohsen Azimi)
+
+ * Add chai (Mohsen Azimi)
+
+ * Add e2e tests (Mohsen Azimi)
+
+ * Add travis yaml (Mohsen Azimi)
+
+ * manually applied #458 (Tony Tam)
+
+ * updated & rebuilt lib with unified client (Tony Tam)
+
+ * Collapsing multiple elements when resource == '' (Damien Nozay)
+
+ * Add Dockerfile and notes to README. (Daniel Nephin)
+
+ * more platform-independent build (Aliaksandr Autayeu)
+
+
+2015-02-01, Version 2.1.0-M1
+============================
+
+ * updated badge (Tony Tam)
+
+ * merged from develop_2.0 (Tony Tam)
+
+ * fix for submit methods (Tony Tam)
+
+ * fix for https://github.com/swagger-api/swagger-js/issues/210, #814, query param encoding issue (Tony Tam)
+
+ * re-enabled submit methods (Tony Tam)
+
+ * Fixed terms of service link (Shaun Becker)
+
+ * fixed headers, file upload per #662 (Tony Tam)
+
+ * removed unnecessary ignores (Tony Tam)
+
+ * Update README.md (webron)
+
+ * removed handlebars reference (Tony Tam)
+
+ * merged #779 (Tony Tam)
+
+ * Added information about CORS support (webron)
+
+ * fix for #770 (Tony Tam)
+
+ * fix for #761 (Tony Tam)
+
+ * updated swagger-js (Tony Tam)
+
+ * merged from develop, added fix for #627 (Tony Tam)
+
+ * Update SwaggerUi.coffee (Damien Nozay)
+
+ * updated swagger-js per #715 (Tony Tam)
+
+ * Update README.md (Tony Tam)
+
+ * updated swagger.js (Tony Tam)
+
+ * updated versions (Tony Tam)
+
+ * updated swagger-js per https://github.com/swagger-api/swagger-js/issues/167 (Tony Tam)
+
+
+2014-11-22, Version 2.1.0-alpha.6
+=================================
+
+ * added  for 2.0 specs to support multi-select inputs (Tony Tam)
+
+ * fix for default values--standardized on  which is handled by ParameterView.coffee (Tony Tam)
+
+ * Fix spelling errors and improve a sentence (Matt Hurne)
+
+ * Fix spelling error in README.md (Matt Hurne)
+
+ * Update README.md (Matt Hurne)
+
+ * removed file (Tony Tam)
+
+ * proposed fix for #731 (Tony Tam)
+
+ * fix for https://github.com/swagger-api/swagger-ui/issues/729 (Tony Tam)
+
+
+2014-11-17, Version 2.1.0-alpha.5
+=================================
+
+ * updated version (Tony Tam)
+
+ * fix for #727 (Tony Tam)
+
+ * updated link, removed buttons (Tony Tam)
+
+
+2014-11-11, Version 2.1.0-alpha.4
+=================================
+
+ * updated versions (Tony Tam)
+
+ * merged from auth_2.0 branch (Tony Tam)
+
+ * updated js libs (Tony Tam)
+
+ * rebuilt lib (Tony Tam)
+
+ * smarter content type detection (Tony Tam)
+
+ * updated from swagger-js (Tony Tam)
+
+ * added back exports (Tony Tam)
+
+ * Do not create operations for non-HTTP methods/verbs (Jeremy Whitlock)
+
+ * Update README.md (Tony Tam)
+
+ * updated for auth (Tony Tam)
+
+ * minor formatting (Tony Tam)
+
+ * removed validator for 1.2 specs (Tony Tam)
+
+ * whitespace (Tony Tam)
+
+ * updated readme (Tony Tam)
+
+ * updated index (Tony Tam)
+
+ * fix for https://github.com/wordnik/swagger-ui/issues/644, verify path object by type (Tony Tam)
+
+ * updated swagger-js for https://github.com/wordnik/swagger-js/issues/151 (Tony Tam)
+
+ * updated build (Tony Tam)
+
+ * updated js client (Tony Tam)
+
+ * fix for #663 (Tony Tam)
+
+ * updated client per #669 (Tony Tam)
+
+ * fix for #632, param names other than (Tony Tam)
+
+ * added support for body params with name other than (Tony Tam)
+
+ * rebuilt with deprecate support, https://github.com/wordnik/swagger-ui/pull/645 (Tony Tam)
+
+ * merged from https://github.com/wordnik/swagger-ui/pull/642 (Tony Tam)
+
+ * updated version for publish (Tony Tam)
+
+ * updated swagger-js library (Tony Tam)
+
+ * updated version check, multi support for 2.0 (Tony Tam)
+
+ * Adding deprecated indicator to operations (Chris Allen)
+
+
+2014-10-06, Version 2.1.0-alpha.1
+=================================
+
+ * updated version to alpha tag (Tony Tam)
+
+ * fix for header undefined (Tony Tam)
+
+ * added check for schema (Tony Tam)
+
+ * Fix swagger-ui issue#637 [https://github.com/wordnik/swagger-ui/issues/637] to show response for 20x as default if response 200 is not present. (Edmond Chui)
+
+ * fix for #626, added support for (default || defaultValue) (Tony Tam)
+
+ * undid double stringify (Tony Tam)
+
+ * added exception handling, updated client (Tony Tam)
+
+ * formatting (Tony Tam)
+
+ * updated library (Tony Tam)
+
+ * Update README.md (Harold Combs)
+
+ * fix for #605, create default tag group (Tony Tam)
+
+ * added key listener (Tony Tam)
+
+ * fix for #612 (Tony Tam)
+
+ * fixed version (Tony Tam)
+
+ * added validator for v2 (Tony Tam)
+
+ * added logic for  link (Tony Tam)
+
+ * updated lib (Tony Tam)
+
+ * fix for #606, renamed resource  to  in the template (Tony Tam)
+
+ * updated client, converted newlines to br in description (Tony Tam)
+
+ * updated libraries (Tony Tam)
+
+ * fix for #602 (Tony Tam)
+
+ * fix for #596 (Tony Tam)
+
+ * rebuilt distro (Tony Tam)
+
+ * updated client to enable auth #588 (Tony Tam)
+
+ * added null check (Tony Tam)
+
+ * tidy up the commenting (Alex Agranov)
+
+ * pull out onChange handler for #input_apiKey so it can be called manually (Alex Agranov)
+
+ * fix for #592, added http method (Tony Tam)
+
+ * Fixing tags check for undefined. (John Chiu)
+
+ * Escape returned HTML. (David Cole)
+
+ * Use initial url parameter if given, else fallback to petstore example (Markus Wolf)
+
+ * Update package.json (Tony Tam)
+
+ * updated link (Tony Tam)
+
+ * updated versions (Tony Tam)
+
+ * merged from develop (Tony Tam)
+
+ * updated links (Tony Tam)
+
+ * merged from master (Tony Tam)
+
+ * fix for license structure change (Tony Tam)
+
+ * added compatibility table (Tony Tam)
+
+ * added links to readme (Tony Tam)
+
+ * updated readme, resource to remove url if not present (Tony Tam)
+
+ * added response check for swagger 2.0/1.2 client (Tony Tam)
+
+ * fix for #570, sanitized tag names (Tony Tam)
+
+ * removed stubs (Tony Tam)
+
+ * updated swagger lib (Tony Tam)
+
+ * updated swagger-js (Tony Tam)
+
+ * updates to develop branch (Tony Tam)
+
+ * added 2.0 client (Tony Tam)
+
+ * updated files (Tony Tam)
+
+
+2015-07-14, Version 20.0.2
+==========================
+
+
+
 2015-07-14, Version 20.0.1
 ==========================
 
