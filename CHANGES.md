@@ -1,5 +1,13 @@
+2015-08-11, Version 21.0.0-dev.2
+================================
+
+ * Add back src/main/html/css/typography.css (Miroslav Bajtoš)
+
+
 2015-08-11, Version 21.0.0-dev.1
 ================================
+
+ * 21.0.0-dev.1 (Miroslav Bajtoš)
 
  * Add missing jshint dev-dependency (Miroslav Bajtoš)
 
