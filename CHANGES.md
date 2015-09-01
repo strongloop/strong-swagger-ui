@@ -1,5 +1,13 @@
+2015-09-01, Version 21.0.0
+==========================
+
+ * Bump up strong-swagger-client version to ^21.0.0 (Miroslav Bajtoš)
+
+
 2015-08-11, Version 21.0.0-dev.2
 ================================
+
+ * 21.0.0-dev.2 (Miroslav Bajtoš)
 
  * Add back src/main/html/css/typography.css (Miroslav Bajtoš)
 
