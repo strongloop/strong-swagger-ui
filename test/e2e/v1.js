@@ -45,12 +45,9 @@ describe('swagger 1.x spec tests', function () {
   });
 
   elements.forEach(function (id) {
-    it('should render element: ' + id, function (done) {
+    it('should render element: ' + id, function () {
       var locator = webdriver.By.id(id);
-      driver.isElementPresent(locator).then(function (isPresent) {
-        expect(isPresent).to.be.true;
-        done();
-      });
+      return driver.wait(until.elementLocated(locator), 1000);
     });
   });
 
