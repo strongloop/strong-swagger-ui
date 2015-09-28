@@ -11,6 +11,11 @@ if (process.env.CI && !process.env.DISPLAY) {
   process.exit(0);
 }
 
+if (process.env.CI && process.env.label === 'ubuntu-0.10') {
+  console.error('Skipping all browser tests on ubuntu-0.10');
+  process.exit(0);
+}
+
 var webdriver = require('selenium-webdriver');
 
 var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.firefox()).build();
