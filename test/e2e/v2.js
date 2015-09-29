@@ -24,33 +24,14 @@ describe('swagger 2.0 spec tests', function () {
     servers.start('/v2/petstore.json', done);
   });
 
-  afterEach(function(){
-    it('should not have any console errors', function (done) {
-      driver.manage().logs().get('browser').then(function(browserLogs) {
-        var errors = [];
-        browserLogs.forEach(function(log){
-          // 900 and above is "error" level. Console should not have any errors
-          if (log.level.value > 900) {
-            console.log('browser error message:', log.message); errors.push(log);
-          }
-        });
-        expect(errors).to.be.empty;
-        done();
-      });
-    });
-  });
-
   it('should have "Swagger UI" in title', function () {
     return driver.wait(until.titleIs('Swagger UI'), 1000);
   });
 
   elements.forEach(function (id) {
-    it('should render element: ' + id, function (done) {
+    it('should render element: ' + id, function () {
       var locator = webdriver.By.id(id);
-      driver.isElementPresent(locator).then(function (isPresent) {
-        expect(isPresent).to.be.true;
-        done();
-      });
+      return driver.wait(until.elementLocated(locator), 1000);
     });
   });
 
