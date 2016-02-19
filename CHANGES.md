@@ -1,3 +1,15 @@
+2016-02-19, Version 21.0.2
+==========================
+
+ * Disable browser tests on ubuntu-0.10 (Miroslav Bajtoš)
+
+ * Fix CI detection (Miroslav Bajtoš)
+
+ * Improve browser logging (Miroslav Bajtoš)
+
+ * test: wait for swagger resource to be loaded (Miroslav Bajtoš)
+
+
 2015-09-09, Version 21.0.1
 ==========================
 
@@ -38,6 +50,48 @@
  * Fix timing issues in unit-tests (Miroslav Bajtoš)
 
  * Issue #1423: responses containing references to definitions were not being fully resolved when the spec was pulled in over AJAX but was working locally. OperationView.render()'s parsing of the responses was just checking if the ref _started_ with '#/definitions/', not whether it contained it, and when pulled in over AJAX the refs have the URL prepended to them (Aaron Baker)
+
+ * updated versions (Tony Tam)
+
+ * Missing "Headers" translation (Francisco Guimarães)
+
+ * Fix merge (Francisco Guimarães)
+
+ * Missing some data-sw-translation (Francisco Guimarães)
+
+ * dist (Francisco Guimarães)
+
+ * Missing some data-sw-translation at templates (Francisco Guimarães)
+
+ * Build (Francisco Guimarães)
+
+ * merged from swagger-api (Francisco Guimarães)
+
+ * missing some data-sw-translation (Francisco Guimarães)
+
+ * merged (Tony Tam)
+
+ * rebuilt (Tony Tam)
+
+ * Revert "Updating documentation based on issue swagger-ui issue #1414" (Tony Tam)
+
+ * merged to develop_2.0 (Tony Tam)
+
+ * Changes at src (Francisco Guimarães)
+
+ * Translation (Francisco Guimarães)
+
+ * Include pt translation (Francisco Guimarães)
+
+ * Move pt to dist (Francisco Guimarães)
+
+ * Move to dist (Francisco Guimarães)
+
+ * PT localization (Francisco Guimarães)
+
+ * Added built files (sonicd300)
+
+ * Added flexible scope separator (sonicd300)
 
  * Fix build on Node v0.12 and io.js (Miroslav Bajtoš)
 
@@ -121,52 +175,6 @@
 
  * Fix project infrastructure (Miroslav Bajtoš)
 
-
-2015-07-22, Version 2.1.1
-=========================
-
- * updated versions (Tony Tam)
-
- * Missing "Headers" translation (Francisco Guimarães)
-
- * Fix merge (Francisco Guimarães)
-
- * Missing some data-sw-translation (Francisco Guimarães)
-
- * dist (Francisco Guimarães)
-
- * Missing some data-sw-translation at templates (Francisco Guimarães)
-
- * Build (Francisco Guimarães)
-
- * merged from swagger-api (Francisco Guimarães)
-
- * missing some data-sw-translation (Francisco Guimarães)
-
- * merged (Tony Tam)
-
- * rebuilt (Tony Tam)
-
- * Revert "Updating documentation based on issue swagger-ui issue #1414" (Tony Tam)
-
- * merged to develop_2.0 (Tony Tam)
-
- * Changes at src (Francisco Guimarães)
-
- * Translation (Francisco Guimarães)
-
- * Include pt translation (Francisco Guimarães)
-
- * Move pt to dist (Francisco Guimarães)
-
- * Move to dist (Francisco Guimarães)
-
- * PT localization (Francisco Guimarães)
-
- * Added built files (sonicd300)
-
- * Added flexible scope separator (sonicd300)
-
  * Spelling and closing tag fixes (Taras Katkov)
 
  * Fix value for window.location.protocol. (Lucian Hontau)
@@ -192,8 +200,6 @@
  * OAuth flow only selected scopes should be sent to Authorize endpoint #1388. Need to clear out previous popupDialog nodes, so previous checkboxes won't be considered. (Tom Baker)
 
  * Found a bug in OperationView.js which caused the oAuth toggle to be displayed for non-oAuth endpoints if oAuth was enabled at all, fixed it (Robert Brownstein)
-
- * Update README.md (Ron)
 
  * Spelling is hard (Rob Richardson)
 
