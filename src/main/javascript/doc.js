@@ -88,9 +88,7 @@ window.Docs = {
 
 		// If shebang has an operation nickname in it..
 		// e.g. /docs/#!/words/get_search
-		var fragments = $.param.fragment().split('/');
-		fragments.shift(); // get rid of the bang
-
+		var fragments = Docs.getFragments();
 		switch (fragments.length) {
 			case 1:
         if (fragments[0].length > 0) { // prevent matching "#/"
@@ -118,6 +116,12 @@ window.Docs = {
 				break;
 		}
 
+	},
+
+	getFragments : function(){
+		var fragments = $.param.fragment().split('/');
+		fragments.shift(); // get rid of the bang
+		return fragments;
 	},
 
 	toggleEndpointListForResource: function(resource) {
